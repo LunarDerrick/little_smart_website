@@ -4,5 +4,38 @@
 }
 
 img {
-    width: 100%;
+    max-width: 100%;
+    height: auto;
+}
+
+#mobile {
+    display: none;
+}
+
+.container {
+    display: grid;
+    align-items: center;
+    grid-template-columns: max-content auto;
+    column-gap: 5px;
+}
+
+.image {
+    width: 130px;
+    height: auto;
+}
+
+/* This condition activates when preview screen is shorter than given max width. */
+@media screen and (max-width: 479px) {
+    #PC {
+        display: none;
+    }
+
+    #mobile {
+        display: block;
+    }
+
+    .center {
+        margin: auto;
+        width: 100%;
+    }
 }
