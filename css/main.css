@@ -1,27 +1,5 @@
-.center {
-    margin: auto;
-    width: 45%;
-}
-
-img {
-    max-width: 100%;
-    height: auto;
-}
-
 #mobile {
     display: none;
-}
-
-.container {
-    display: grid;
-    align-items: center;
-    grid-template-columns: max-content auto;
-    column-gap: 5px;
-}
-
-.image {
-    width: 130px;
-    height: auto;
 }
 
 /* This condition activates when preview screen is shorter than given max width. */
@@ -38,4 +16,36 @@ img {
         margin: auto;
         width: 100%;
     }
+}
+
+section {
+    margin: 10px;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+.navbar {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.navbar.bg-custom {
+    background-color: #D9D9D9;
+}
+
+.navbar-brand {
+    width: 90px;
+    height: auto;
+}
+
+.center {
+    margin: auto;
+    width: 45%;
+}
+
+footer {
+    text-align: center;
 }
