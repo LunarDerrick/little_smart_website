@@ -1,30 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<title>About Us - Little Smart Day Care Centre</title>
+<head>
+    <title>About Us - Little Smart Day Care Centre</title>
 
-<header>
-    <h1>小聪明安亲班 Little Smart Day Care Centre</h1>
-</header>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--Bootstrap implementation-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+
+    <!--CSS overwrite-->
+        <link rel="stylesheet" href="css/main.css">
+</head>
 
 <body>
-    <nav>
-        <a href="index.html">Home</a>
-        &nbsp;
-        <a href="login.html">Teacher Login</a>
-        &nbsp;
-        <a href="about.html">About Us</a>
+    <nav class="navbar navbar-expand navbar-light bg-custom">
+        <a class="navbar-brand" href="index.html">
+            <img src="media/logo.png" class="d-inline-block align-top" alt="day care centre logo">
+        </a>
+
+        <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+                <!-- <a class="nav-link" href="login.html">Teacher Login</a> -->
+                <a class="nav-link" href="login_admin_temp.html">Teacher Login</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="about.html">About Us</a>
+            </li>
+        </ul>
     </nav>
 
-    <main>
-        <p>About Us</p>
-    </main>
+    <section>
+        <p id="PC">You are now viewing as <b>Computer</b>.</p>
+        <p id="mobile">You are now viewing as <b>Mobile Device</b>.</p>
+
+        <h1>About Us</h1>
+        <br>
+
+    </section>
 
     <footer>
         <small><i>
-            © 2024 Little Smart Day Care Centre<br>
+            © 2024 Little Smart Day Care Centre
         </i></small>
     </footer>
+    <br>
 </body>
 
 </html>
