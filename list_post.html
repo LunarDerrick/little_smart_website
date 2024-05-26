@@ -37,13 +37,14 @@
         <p id="PC">You are now viewing as <b>Computer</b>.</p>
         <p id="mobile">You are now viewing as <b>Mobile Device</b>.</p>
 
-        <button type="button" class="btn btn-primary" onclick="document.location='roster.html'">Name List</button>
-        <button type="button" class="btn btn-primary" onclick="document.location='feedback.html'">Feedback Inbox</button>
-        <button type="button" class="btn btn-primary" onclick="document.location='list_post.html'">Edit Post</button>
-        <button type="button" class="btn btn-primary" onclick="document.location='index.html'">Logout</button>
+        <button type="button" class="btn btn-primary dashboard" onclick="document.location='roster.html'">Name List</button>
+        <button type="button" class="btn btn-primary dashboard" onclick="document.location='feedback.html'">Feedback Inbox</button>
+        <button type="button" class="btn btn-primary dashboard" onclick="document.location='list_post.html'">Edit Post</button>
+        <button type="button" class="btn btn-primary dashboard" onclick="document.location='index.html'">Logout</button>
         <h1>Post List</h1>
         <br>
-        <table>
+
+        <table id="post">
             <colgroup>
                 <col id="date">
                 <col id="title">
@@ -86,7 +87,8 @@
                     <button type="button" class="btn btn-primary">Delete</button>
                 </td>
             </tr>
-        </table>
+        </table>  
+
         <br>
 
     </section>
