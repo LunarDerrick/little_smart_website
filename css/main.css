@@ -1,10 +1,31 @@
-#mobile {
+#tablet, #mobile {
     display: none;
 }
 
 /* This condition activates when preview screen is shorter than given max width. */
+/* This is exclusive for tablets */
+@media screen and (max-width: 768px) {
+    #PC, #mobile {
+        display: none;
+    }
+
+    #tablet {
+        display: block;
+    }
+
+    button.tablet {
+        display: block;
+        width: 100%;
+        margin: 5px auto;
+        /* to fix some misaligned text */
+        padding: 10px;
+    }
+}
+
+/* This condition activates when preview screen is shorter than given max width. */
+/* This is generally for most smartphones */
 @media screen and (max-width: 479px) {
-    #PC {
+    #PC, #tablet {
         display: none;
     }
 
@@ -17,14 +38,24 @@
         width: 100%;
     }
 
-    button.dashboard {
+    button.mobile {
         display: block;
         width: 100%;
         margin: 5px auto;
+        /* to fix some misaligned text */
+        padding: 10px;
+    }
+
+    .line_break {
+        white-space: initial;
     }
 
     table#post th:nth-child(3), td:nth-child(3), col#description {
         display: none;
+    }
+
+    col#date {
+        width: 30%;
     }
 }
 
@@ -69,7 +100,6 @@ table, th, td {
     white-space: nowrap;
 }
 
-
 col#date {
     width: 15%;
 }
@@ -84,6 +114,17 @@ col#action {
     width: 13%;
 }
 
+button#add_post {
+    float: right;
+}
+
 footer {
     text-align: center;
+}
+
+/* footer will always attach to bottom of screen */
+body {
+    min-height: 100vh;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
 }

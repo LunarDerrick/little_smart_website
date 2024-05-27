@@ -35,12 +35,13 @@
 
     <section>
         <p id="PC">You are now viewing as <b>Computer</b>.</p>
+        <p id="tablet">You are now viewing as <b>Tablet</b>.</p>
         <p id="mobile">You are now viewing as <b>Mobile Device</b>.</p>
 
-        <button type="button" class="btn btn-primary dashboard" onclick="document.location='roster.html'">Name List</button>
-        <button type="button" class="btn btn-primary dashboard" onclick="document.location='feedback.html'">Feedback Inbox</button>
-        <button type="button" class="btn btn-primary dashboard" onclick="document.location='list_post.html'">Edit Post</button>
-        <button type="button" class="btn btn-primary dashboard" onclick="document.location='index.html'">Logout</button>
+        <button type="button" class="btn btn-primary mobile" onclick="document.location='roster.html'">Name List</button>
+        <button type="button" class="btn btn-primary mobile" onclick="document.location='feedback.html'">Feedback Inbox</button>
+        <button type="button" class="btn btn-primary mobile" onclick="document.location='list_post.html'">Edit Post</button>
+        <button type="button" class="btn btn-primary mobile" onclick="document.location='index.html'">Logout</button>
         <h1>Post List</h1>
         <br>
 
@@ -58,7 +59,7 @@
                 <th>Actions</th>
             </tr>
             <tr>
-                <td>2024-04-03-18-00-00</td>
+                <td class="line_break">2024-04-03-18-00-00</td>
                 <td>Title Text A</td>
                 <td>
                     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
@@ -68,12 +69,12 @@
                     culpa qui officia deserunt mollit anim id est laborum."
                 </td>
                 <td>
-                    <button type="button" class="btn btn-primary">Edit</button>
-                    <button type="button" class="btn btn-primary">Delete</button>
+                    <button type="button" class="btn btn-primary mobile tablet">Edit</button>
+                    <button type="button" class="btn btn-primary mobile tablet">Delete</button>
                 </td>
             </tr>
             <tr>
-                <td>2024-03-06-15-34-00</td>
+                <td class="line_break">2024-03-06-15-34-00</td>
                 <td>Title Text B</td>
                 <td>
                     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
@@ -83,14 +84,14 @@
                     culpa qui officia deserunt mollit anim id est laborum."
                 </td>
                 <td>
-                    <button type="button" class="btn btn-primary">Edit</button>
-                    <button type="button" class="btn btn-primary">Delete</button>
+                    <button type="button" class="btn btn-primary mobile tablet">Edit</button>
+                    <button type="button" class="btn btn-primary mobile tablet">Delete</button>
                 </td>
             </tr>
         </table>  
-
         <br>
-
+        <button type="button" class="btn btn-primary" id="add_post">New Post</button>
+        <br><br>
     </section>
 
     <footer>
