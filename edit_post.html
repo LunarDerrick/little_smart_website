@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Login - Little Smart Day Care Centre</title>
+    <title>Edit Post - Little Smart Day Care Centre</title>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,11 +24,12 @@
 
         <ul class="navbar-nav ms-auto">
             <li class="nav-item">
-                <a class="nav-link" href="login.html">Teacher Login</a>
+                <b>
+                <a class="nav-link" href="roster.html">ADMIN</a>
+                </b>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="about.html">About Us</a>
-            </li>
         </ul>
     </nav>
 
@@ -36,30 +37,14 @@
         <p id="PC">You are now viewing as <b>Computer</b>.</p>
         <p id="tablet">You are now viewing as <b>Tablet</b>.</p>
         <p id="mobile">You are now viewing as <b>Mobile Device</b>.</p>
-
-        <div id="form-container">
-            <div>
-                <h1>Teacher Login</h1>
-            </div>
-            <form method="POST">
-                <div>
-                    <label for="username">Username: </label>
-                    <input type="text" name="username" class="login-field">
-                </div>
-                <div>
-                    <label for="password">Password: </label>
-                    <input type="password" name="password" class="login-field">
-                </div>
-                <div>
-                    <button type="submit" class="btn btn-primary">LOGIN</button>
-                </div>
-            </form>
-            <div id="corner">
-                <a href="#">Forgot password?</a>
-            </div>
-        </div>
-
+        
+        <button type="button" class="btn btn-primary" onclick="document.location='roster.html'">Name List</button>
+        <button type="button" class="btn btn-primary" onclick="document.location='feedback.html'">Feedback Inbox</button>
+        <button type="button" class="btn btn-primary" onclick="document.location='list_post.html'">Edit Post</button>
+        <button type="button" class="btn btn-primary" onclick="document.location='index.html'">Logout</button>
+        <h1>Edit Post</h1>
         <br>
+
     </section>
 
     <footer>
