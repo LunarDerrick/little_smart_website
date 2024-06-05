@@ -57,10 +57,6 @@
     col#date {
         width: 30%;
     }
-
-    #form-container {
-        text-align: left;
-    }
 }
 
 section {
@@ -133,10 +129,6 @@ button#add_post {
     align-items: center;
     width: fit-content;
     text-align: right;
-}
-
-form div {
-    margin: 5px;
 }
 
 .login-field {

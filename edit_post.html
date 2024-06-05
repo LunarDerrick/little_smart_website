@@ -38,11 +38,52 @@
         <p id="tablet">You are now viewing as <b>Tablet</b>.</p>
         <p id="mobile">You are now viewing as <b>Mobile Device</b>.</p>
         
-        <button type="button" class="btn btn-primary" onclick="document.location='roster.html'">Name List</button>
-        <button type="button" class="btn btn-primary" onclick="document.location='feedback.html'">Feedback Inbox</button>
-        <button type="button" class="btn btn-primary" onclick="document.location='list_post.html'">Edit Post</button>
-        <button type="button" class="btn btn-primary" onclick="document.location='index.html'">Logout</button>
-        <h1>Edit Post</h1>
+        <a href="list_post.html">Go Back</a>
+
+        <section>
+            <div class="container">
+                <div class="container section-title ">
+                    <h1>Edit Post</h1>
+                </div>
+                
+                <form method="POST" enctype="multipart/form-data">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12 form-label">
+                                <label for="title"><b>Title</b></label>
+                                <input type="text" id="title" name="title" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-label">
+                                <label for="content"><b>Description</b></label>
+                                <textarea id="content" name="description" rows="5" class="form-control"></textarea>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-7">
+                                <div class="row mt-4">
+                                    <div class="col-12">
+                                        <input type="submit" value="Save Post" class="btn btn-primary">
+                                    </div>
+                                </div>
+                            </div>  
+                            <div class="col-md-5">
+                                <div class="row">
+                                    <div class="col">
+                                        <label for="image"><b>Image</b></label>
+                                        <input type="file" accept="image/*" id="image" name="image" class="form-control" required>
+                                        <picture>
+                                            <img id="img-preview" src="media/placeholder.png" class="img-fluid card-img-top" alt="...">
+                                        </picture>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
         <br>
 
     </section>
