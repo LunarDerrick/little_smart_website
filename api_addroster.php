@@ -72,7 +72,17 @@ $postvar = sanitize($_POST, $fields);
 // $currenttime = round(microtime(TRUE) * 1000); // epoch timestamp
 
 // generate student_id
-$student_id = rand(100000, 999999);
+$idlist = $conn -> prepare("SELECT student_id FROM students");
+$idlist->execute();
+$result = $idlist->get_result();
+if ($result->num_rows){
+    while($row = $result->fetch_object()){
+        $keyvalue = (array) $row;
+        $finalidlist[] = $keyvalue['student_id'];
+    }
+}
+print_r($finalidlist);
+$student_id = generateID($finalidlist);
 
 //prepare insert query
 $query = $conn -> prepare("INSERT INTO students (student_id, student_name, age, telno, school, standard, mandarin, english, malay, math, science) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
@@ -95,4 +105,12 @@ if ($query -> execute()){
     // TEXT;
 } else {
     http_response_code(500);
+}
+
+function generateID($existingNumbers) {
+    do {
+        $randomNumber = mt_rand(100000, 999999);
+    } while (in_array($randomNumber, $existingNumbers));
+
+    return $randomNumber;
 }

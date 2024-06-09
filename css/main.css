@@ -180,6 +180,10 @@ a.img-btn {
     text-decoration: none;
 }
 
+.close {
+    float: right;
+}
+
 footer {
     text-align: center;
 }
