@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 08, 2024 at 07:39 PM
+-- Generation Time: Jun 09, 2024 at 10:19 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -20,6 +20,35 @@ SET time_zone = "+00:00";
 --
 -- Database: `littlesmartdb`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `students`
+--
+
+CREATE TABLE `students` (
+  `student_id` int(128) NOT NULL,
+  `student_name` varchar(255) NOT NULL,
+  `age` int(3) NOT NULL,
+  `telno` varchar(16) NOT NULL,
+  `school` varchar(255) NOT NULL,
+  `standard` int(1) NOT NULL,
+  `mandarin` int(3) NOT NULL,
+  `english` int(3) NOT NULL,
+  `malay` int(3) NOT NULL,
+  `math` int(3) NOT NULL,
+  `science` int(3) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `students`
+--
+
+INSERT INTO `students` (`student_id`, `student_name`, `age`, `telno`, `school`, `standard`, `mandarin`, `english`, `malay`, `math`, `science`) VALUES
+(100001, 'John Doe', 10, '0123456789', 'SJK(C) Bukit Serdang', 4, 80, 78, 95, 83, 88),
+(100002, 'Mary Sue', 10, '0198765432', 'SJK(C) Bukit Serdang', 4, 60, 34, 66, 50, 71),
+(100003, 'Tan Yi Xiang', 9, '0134567892', 'SJK(C) Bukit Serdang', 3, 83, 72, 79, 86, 77);
 
 -- --------------------------------------------------------
 
@@ -44,6 +73,12 @@ INSERT INTO `users` (`admin_id`, `username`, `password`, `email`) VALUES
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `students`
+--
+ALTER TABLE `students`
+  ADD PRIMARY KEY (`student_id`);
 
 --
 -- Indexes for table `users`
