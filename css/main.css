@@ -50,12 +50,16 @@
         white-space: initial;
     }
 
-    table#post th:nth-child(3), td:nth-child(3), col#description {
+    table#post th:nth-child(3), table#post td:nth-child(3), col#description {
         display: none;
     }
 
     col#date {
         width: 30%;
+    }
+
+    #roster {
+        width: 95vw;
     }
 }
 
@@ -87,12 +91,13 @@ img {
     width: 45%;
 }
 
-table {
+table#post {
     width: 100%;
     table-layout: fixed;
 }
 
-table, th, td {
+/* select <table id="post"> and all its child elements */
+table#post, table#post th, table#post td {
     border: 1px solid black;
     padding: 10px;
     overflow: hidden;
@@ -100,22 +105,27 @@ table, th, td {
     white-space: nowrap;
 }
 
-col#date {
+th {
+    background: #f2f2f2;
+}
+
+table#post col#date {
     width: 15%;
 }
 
-col#title {
+table#post col#title {
     width: 30%;
 }
 
 /* col#description takes up the rest of the width */
 
-col#action {
+table#post col#action {
     width: 13%;
 }
 
-button#add_post {
+button.crud {
     float: right;
+    width: 100px;
 }
 
 #form-container {
@@ -138,6 +148,36 @@ button#add_post {
 
 #corner {
     align-self: flex-end;
+}
+
+#roster {
+    overflow-x: auto;
+}
+
+#roster table {
+    width: 100%;
+    border-collapse: collapse;
+    white-space: nowrap;
+}
+
+#roster th, #roster td {
+    border: 1px solid black;
+    padding: 10px;
+    text-align: left;
+}
+
+#roster th {
+    position: sticky;
+    top: 0;
+}
+
+.img-btn img {
+    max-width: 30px;
+    height: auto;
+}
+
+a.img-btn {
+    text-decoration: none;
 }
 
 footer {

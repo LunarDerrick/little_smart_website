@@ -3,40 +3,18 @@
 
 <?php
 require_once("init_db.php");
-// // force redirect if there is session
-// include_once("init_session.php");
-// if (isset($_SESSION["username"]) && isset($_SESSION["admin_id"])){
-//     header("Location: login_admin_temp.html");
-//     die;
-// }
-// include helper to get user info
 include_once "helper_userinfo.php";
-// // for cookie to store login
-// include_once("helper_keep_login.php");
 
 $loggedInFailed = false;
 
 # only run if is set
 if ($_SERVER['REQUEST_METHOD'] === 'POST'){
-    if(empty($_POST["username"]) || empty($_POST["password"])) {
-        // @todo
-    }
     # retrieve post variable
     $username = $_POST["username"];
     $password = $_POST["password"];
     if ($userinfo = verifyUsername($conn, $username)){
         # verify password   
         if(password_verify($password, $userinfo["password"])){
-            # correct password
-            // $_SESSION["userid"] = intval($userinfo["userid"]);
-            // $_SESSION["username"] = htmlentities($username);
-
-            // if (boolval($_POST["keeplogin"])){
-            //     keepUserLoggedIn($conn, intval($userinfo["userid"]), $username);
-            // }
-
-            // # go to index.php
-            // header("Location: .");
             header("Location: login_admin_temp.html");
             die; # prevent if browser dont respect redirect
         } else {
