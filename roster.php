@@ -69,50 +69,10 @@ include_once "helper_list_roster.php";
                     [$list] = listRoster($conn);
                     buildRoster($list);
                 ?>
-                <!-- <tr>
-                    <td>
-                        <a class="img-btn" href="edit_roster.html">
-                            <img src="media/edit_img.png" alt="edit">
-                        </a>
-                        <a class="img-btn" href="#">
-                            <img src="media/delete_img.png" alt="delete">
-                        </a>
-                    </td>
-                    <td>John Doe</td>
-                    <td>10</td>
-                    <td>0123456789</td>
-                    <td>SJK(C) Bukit Serdang</td>
-                    <td>4</td>
-                    <td>80</td>
-                    <td>78</td>
-                    <td>95</td>
-                    <td>83</td>
-                    <td>88</td>
-                </tr>
-                <tr>
-                    <td>
-                        <a class="img-btn" href="edit_roster.html">
-                            <img src="media/edit_img.png" alt="edit">
-                        </a>
-                        <a class="img-btn" href="#">
-                            <img src="media/delete_img.png" alt="delete">
-                        </a>
-                    </td>
-                    <td>Mary Sue</td>
-                    <td>10</td>
-                    <td>0198765432</td>
-                    <td>SJK(C) Bukit Serdang</td>
-                    <td>4</td>
-                    <td>60</td>
-                    <td>34</td>
-                    <td>66</td>
-                    <td>90</td>
-                    <td>71</td>
-                </tr> -->
             </table>
         </div>
         <br>
-        <button type="button" class="btn btn-primary crud" onclick="document.location='add_roster.html'">ADD</button>
+        <button type="button" class="btn btn-primary crud" onclick="document.location='add_roster.php'">ADD</button>
     </section>
 
     <br><br>

@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<?php
+require_once("init_db.php");
+?>
+
 <head>
     <title>New Entry - Little Smart Day Care Centre</title>
 
@@ -38,7 +42,7 @@
         <p id="tablet">You are now viewing as <b>Tablet</b>.</p>
         <p id="mobile">You are now viewing as <b>Mobile Device</b>.</p>
         
-        <a href="roster.html">Go Back</a>
+        <a href="roster.php">Go Back</a>
 
         <section>
             <div class="container">
@@ -46,7 +50,7 @@
                     <h1>New Entry</h1>
                 </div>
                 
-                <form method="POST" enctype="multipart/form-data">
+                <form action="api_addroster.php" method="POST" enctype="multipart/form-data">
                     <div class="container">
                         <div class="row">
                             <div class="col-md-12 form-label">
