@@ -1,6 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<?php
+require_once("init_db.php");
+include_once "helper_list_roster.php";
+
+# only run if is set
+if ($_SERVER['REQUEST_METHOD'] !== 'GET'){
+    http_response_code(404);
+    // include('404.php');
+    die();
+}
+
+# no id provided
+if (!isset($_GET["id"]) || empty($_GET["id"])){
+    http_response_code(404);
+    // include('404.php'); // provide your own HTML for the error page
+    die();
+}
+
+$student_id = intval($_GET["id"]) ?? die; // try to get integer value, or else die
+
+// get post item
+$stmt = $conn->prepare("SELECT student_id, student_name, age, telno, school, standard, mandarin, english, malay, math, science
+    FROM students 
+    WHERE students.student_id = ?");
+$stmt->bind_param("i", $student_id);
+if (!$stmt->execute()){
+    http_response_code(500);
+    die;
+}
+$result = $stmt->get_result();
+if ($row = $result->fetch_object()){
+    $entry = $row;
+    if (empty($entry->student_id)) {
+        // no entry matching id
+        http_response_code(404);
+        // include('404.php'); // provide your own HTML for the error page
+        die();
+    }
+} else {
+    http_response_code(500);
+    die;
+}
+?>
+
 <head>
     <title>Edit Entry - Little Smart Day Care Centre</title>
 
@@ -46,80 +90,81 @@
                     <h1>Edit Entry</h1>
                 </div>
                 
-                <form method="POST" enctype="multipart/form-data">
+                <form action="api_editroster.php?id=<?php echo $entry->student_id?>" method="POST" enctype="multipart/form-data">
                     <div class="container">
                         <div class="row">
                             <div class="col-md-12 form-label">
                                 <label for="name"><b>Name</b></label>
-                                <input type="text" id="name" name="name" class="form-control" required>
+                                <input type="text" id="name" name="name" class="form-control" value="<?php echo $entry->student_name?>" required>
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-label">
                                 <label for="age"><b>Age</b></label>
-                                <input type="age" id="age" name="age" class="form-control" required>
+                                <input type="age" id="age" name="age" class="form-control" value="<?php echo $entry->age?>" required>
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-label">
                                 <label for="telno"><b>Phone Number</b></label>
-                                <input type="telno" id="telno" name="telno" class="form-control" required>
+                                <input type="telno" id="telno" name="telno" class="form-control" value="<?php echo $entry->telno?>" required>
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-label">
                                 <label for="school"><b>School</b></label>
-                                <input type="school" id="school" name="school" class="form-control" required>
+                                <input type="school" id="school" name="school" class="form-control" value="<?php echo $entry->school?>" required>
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-label">
                                 <label for="standard"><b>Standard</b></label>
                                 <select type="standard" id="standard" name="standard" class="form-select" required>
-                                    <option value="1">1</option>
+                                    <?php preSelect($entry->standard)?>
+                                    <!-- <option value="1">1</option>
                                     <option value="2">2</option>
                                     <option value="3">3</option>
                                     <option value="4">4</option>
                                     <option value="5">5</option>
-                                    <option value="6">6</option>
+                                    <option value="6">6</option> -->
                                 </select>
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-label">
                                 <label for="mandarin"><b>Mandarin</b></label>
-                                <input type="mandarin" id="mandarin" name="mandarin" class="form-control" required>
+                                <input type="mandarin" id="mandarin" name="mandarin" class="form-control" value="<?php echo $entry->mandarin?>" required>
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-label">
                                 <label for="english"><b>English</b></label>
-                                <input type="english" id="english" name="english" class="form-control" required>
+                                <input type="english" id="english" name="english" class="form-control" value="<?php echo $entry->english?>" required>
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-label">
                                 <label for="malay"><b>Malay</b></label>
-                                <input type="malay" id="malay" name="malay" class="form-control" required>
+                                <input type="malay" id="malay" name="malay" class="form-control" value="<?php echo $entry->malay?>" required>
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-label">
                                 <label for="math"><b>Mathematics</b></label>
-                                <input type="math" id="math" name="math" class="form-control" required>
+                                <input type="math" id="math" name="math" class="form-control" value="<?php echo $entry->math?>" required>
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-label">
                                 <label for="science"><b>Science</b></label>
-                                <input type="science" id="science" name="science" class="form-control" required>
+                                <input type="science" id="science" name="science" class="form-control" value="<?php echo $entry->science?>" required>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-7">
                                 <div class="row mt-4">
                                     <div class="col-12">
-                                        <input type="submit" value="Add Entry" class="btn btn-primary">
+                                        <input type="submit" value="Save" class="btn btn-primary">
                                     </div>
                                 </div>
                             </div>  
