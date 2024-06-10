@@ -50,53 +50,52 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-6 col-lg-4">
-                        <div class="card border-2 transform-on-hover">
-                            div box
+                        <div class="card border-2">
                             <picture>
-                                <canvas id="pieChart" style="width:100%;max-width:270px"></canvas>
+                                <canvas id="barchart_passingrate"></canvas>
                             </picture>
                             <div class="card-body">
-                                <h6><a href="#" class="stretched-link">Passing Rate of All Subjects</a></h6>
+                                <h6>Passing Rate of All Subjects</h6>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6 col-lg-4">
-                        <div class="card border-2 transform-on-hover">
+                        <div class="card border-2">
                             <picture>
-                                <canvas id="verticalBarChart2" style="width:100%;max-width:335px"></canvas>
+                                <canvas id="verticalBarChart2"></canvas>
                             </picture>
                             <div class="card-body">
-                                <h6><a href="#" class="stretched-link">Grade Distribution for Subject A</a></h6>
+                                <h6>Grade Distribution for Subject A</h6>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6 col-lg-4">
-                        <div class="card border-2 transform-on-hover">
+                        <div class="card border-2">
                             <picture>
-                                <canvas id="comments" style="width:100%;max-width:335px"></canvas>
+                                <canvas id="comments"></canvas>
                             </picture>
                             <div class="card-body">
-                                <h6><a href="#" class="stretched-link">Top Scorer for Each Subject</a></h6>
+                                <h6>Top Scorer for Each Subject</h6>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6 col-lg-4">
-                        <div class="card border-2 transform-on-hover">
+                        <div class="card border-2">
                             <picture>
-                                <canvas id="verticalBarChart" style="width:100%;max-width:335px"></canvas>
+                                <canvas id="verticalBarChart"></canvas>
                             </picture>
                             <div class="card-body">
-                                <h6><a href="#" class="stretched-link">Average Score of All Subjects</a></h6>
+                                <h6>Average Score of All Subjects</h6>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6 col-lg-4">
-                        <div class="card border-2 transform-on-hover">
+                        <div class="card border-2">
                             <picture>
-                                <canvas id="horizontalBarChart" style="width:100%;max-width:330px"></canvas>
+                                <canvas id="horizontalBarChart"></canvas>
                             </picture>
                             <div class="card-body">
-                                <h6><a href="#" class="stretched-link">Graph E</a></h6>
+                                <h6>Graph E</h6>
                             </div>
                         </div>
                     </div>
@@ -128,7 +127,62 @@
 
         const showGraph = () => {
             $.post("api_analysis.php", function(data) { 
+                // // debug test whether fetch the correct data
+                // console.log(data);
 
+                // convert data into no. of pass/total
+                const pass_rate = data["pass_data"];
+                const pass_title = [].concat(...pass_rate.map(obj => Object.keys(obj)));
+                const pass_value = [].concat(...pass_rate.map(obj => Object.values(obj)));
+                pass_title.shift();
+                const total = pass_value.shift();
+                let pass = [];
+                for (let i = 0; i < pass_value.length; i++) {
+                    pass.push(pass_value[i] / total);
+                }
+
+                // vertical bar chart
+                new Chart("barchart_passingrate", {
+                    type: "bar",
+                    data: {
+                        labels: pass_title,
+                        datasets: [{
+                            backgroundColor: ["#fd7f6f", "#7eb0d5", "#b2e061", "#bd7ebe", "#ffb55a"],
+                            data: pass
+                        }]
+                    },
+                    options: {
+                        plugins: {
+                            legend: {
+                                display: false
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(tooltipItem) {
+                                        var value = Math.round(tooltipItem.raw * 100); // Convert decimal to percentage
+                                        return value + '%'; // Display as percentage with two decimal places
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                suggestedMin: 0, // Minimum value for the y-axis
+                                suggestedMax: 1, // Maximum value for the y-axis
+                                title: {
+                                    display: true,
+                                    text: 'Percentage(%)'
+                                },
+                                ticks: {
+                                    // convert decimal to percentage
+                                    callback: function(value, index, values) {
+                                        return (value * 100) + '%';
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
             })
         }
     </script>
