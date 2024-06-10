@@ -4,15 +4,6 @@ require_once("init_db.php");
 // prepare array to return data
 $data = array();
 
-// // fetch post data by rating from database
-// $myquery = "SELECT posts.postid, title, caption, image, AVG(ratings.rating) AS avg_rating
-//             FROM posts
-//             LEFT JOIN ratings ON posts.postid=ratings.postid
-//             WHERE posts.userid= ?
-//             GROUP BY posts.postid
-//             ORDER BY avg_rating DESC
-//             LIMIT 5";
-
 // fetch passing rate data from database
 $myquery = "SELECT COUNT(*) AS total, 
             COUNT(CASE WHEN mandarin >= 60 THEN 1 END) AS Mandarin, 
@@ -34,25 +25,44 @@ while($row = $result->fetch_assoc()){
     $data["pass_data"][] = $row;
 }
 
+// fetch science grade distribution data from database
+// fetch science column
+// assign grade to each score
+$myquery = "SELECT 
+            SUM(CASE WHEN science >= 80 THEN 1 ELSE 0 END) AS 'A',
+            SUM(CASE WHEN science >= 60 AND science < 80 THEN 1 ELSE 0 END) AS 'B',
+            SUM(CASE WHEN science >= 40 AND science < 60 THEN 1 ELSE 0 END) AS 'C',
+            SUM(CASE WHEN science >= 20 AND science < 40 THEN 1 ELSE 0 END) AS 'D',
+            SUM(CASE WHEN science < 20 THEN 1 ELSE 0 END) AS 'E'
+            FROM students";
+try {
+    $query = $conn->prepare($myquery);
+    // $query->bind_param('s', $student_id);
+    $query->execute();
+} catch (Exception $e) {
+    echo $e->getMessage();
+    die;
+}
+$result = $query->get_result();
+while($row = $result->fetch_assoc()){
+    $data["gradescience_data"][] = $row;
+}
+
+// // fetch post data by rating from database
+// $myquery = "SELECT posts.postid, title, caption, image, AVG(ratings.rating) AS avg_rating
+//             FROM posts
+//             LEFT JOIN ratings ON posts.postid=ratings.postid
+//             WHERE posts.userid= ?
+//             GROUP BY posts.postid
+//             ORDER BY avg_rating DESC
+//             LIMIT 5";
+
 // // fetch post data by view count from database
 // $myquery = "SELECT posts.postid, title, caption, image, viewcount
 //             FROM posts
 //             WHERE posts.userid= ?
 //             ORDER BY viewcount DESC
 //             LIMIT 5";
-// try {
-//     $query = $conn->prepare($myquery);
-//     $query->bind_param('s', $userid);
-//     $query->execute();
-// } catch (Exception $e) {
-//     echo $e->getMessage();
-//     die;
-// }
-// $result = $query->get_result();
-// while($row = $result->fetch_assoc()){
-//     $data["mostviews"][] = $row;
-// }
-
 
 // // fetch post data by week from database
 // $myquery = "SELECT COUNT(*) AS total,
@@ -62,20 +72,6 @@ while($row = $result->fetch_assoc()){
 // AND posts.createdtime/1000 > UNIX_TIMESTAMP(DATE_SUB(NOW(), INTERVAL 7 day))
 // GROUP BY postdate
 // ORDER BY postdate";
-// try {
-//     $query = $conn->prepare($myquery);
-//     $query->bind_param('s', $userid);
-//     $query->execute();
-// } catch (Exception $e) {
-//     echo $e->getMessage();
-//     die;
-// }
-
-// $result = $query->get_result();
-// while($row = $result->fetch_object()){
-//     $data["postweek"][] = $row;
-// }
-
 
 // // fetch rating data from database
 // $myquery = "SELECT ratings.rating, COUNT(ratings.rating) AS total
@@ -83,21 +79,7 @@ while($row = $result->fetch_assoc()){
 //             LEFT JOIN posts ON posts.postid=ratings.postid
 //             WHERE posts.userid= ?
 //             GROUP BY rating
-//             ORDER BY rating";
-// try {
-//     $query = $conn->prepare($myquery);
-//     $query->bind_param('s', $userid);
-//     $query->execute();
-// } catch (Exception $e) {
-//     echo $e->getMessage();
-//     die;
-// }
-
-// $result = $query->get_result();
-// while($row = $result->fetch_object()){
-//     $data["rating"][] = $row;
-// }
-
+//             ORDER BY rating";\
 
 // // fetch comment data from database
 // $myquery = "SELECT COUNT(*) AS total_count,
@@ -109,19 +91,6 @@ while($row = $result->fetch_assoc()){
 //             AND comments.userid != ?
 //             GROUP BY commentdate
 //             ORDER BY commentdate";
-// try {
-//     $query = $conn->prepare($myquery);
-//     $query->bind_param('ss', $userid, $userid);
-//     $query->execute();
-// } catch (Exception $e) {
-//     echo $e->getMessage();
-//     die;
-// }
-
-// $result = $query->get_result();
-// while($row = $result->fetch_object()){
-//     $data["commentweek"][] = $row;
-// }
 
 JSONresponse(200, $data)
 

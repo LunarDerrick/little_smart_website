@@ -1,0 +1,26 @@
+canvas {
+    width: 100%;
+    /* default graph size, custom size to be added */
+    max-width: 310px;
+}
+
+.card {
+    padding: 15px;
+}
+
+.card-body {
+    padding: 16px 16px 0;
+}
+
+.card-body h6 {
+    text-align: center;
+}
+
+canvas#barchart_passingrate {
+    max-width: 310px;
+}
+
+canvas#piechart_gradescience {
+    margin: auto;
+    max-width: 152px;
+}

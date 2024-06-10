@@ -14,6 +14,7 @@
 
     <!--CSS overwrite-->
     <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/graph.css">
 </head>
 
 <body>
@@ -62,10 +63,10 @@
                     <div class="col-md-6 col-lg-4">
                         <div class="card border-2">
                             <picture>
-                                <canvas id="verticalBarChart2"></canvas>
+                                <canvas id="piechart_gradescience"></canvas>
                             </picture>
                             <div class="card-body">
-                                <h6>Grade Distribution for Subject A</h6>
+                                <h6>Grade Distribution for Science</h6>
                             </div>
                         </div>
                     </div>
@@ -86,16 +87,6 @@
                             </picture>
                             <div class="card-body">
                                 <h6>Average Score of All Subjects</h6>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-4">
-                        <div class="card border-2">
-                            <picture>
-                                <canvas id="horizontalBarChart"></canvas>
-                            </picture>
-                            <div class="card-body">
-                                <h6>Graph E</h6>
                             </div>
                         </div>
                     </div>
@@ -126,10 +117,14 @@
         });
 
         const showGraph = () => {
-            $.post("api_analysis.php", function(data) { 
-                // // debug test whether fetch the correct data
+            $.post("api_analysis.php", function(data) {
+                // importing datalabel plugin
+                Chart.register(ChartDataLabels);
+
+                // debug test whether fetch the correct data
                 // console.log(data);
 
+                // Passing Rate Bar Chart
                 // convert data into no. of pass/total
                 const pass_rate = data["pass_data"];
                 const pass_title = [].concat(...pass_rate.map(obj => Object.keys(obj)));
@@ -141,7 +136,7 @@
                     pass.push(pass_value[i] / total);
                 }
 
-                // vertical bar chart
+                // draw vertical bar chart
                 new Chart("barchart_passingrate", {
                     type: "bar",
                     data: {
@@ -163,6 +158,9 @@
                                         return value + '%'; // Display as percentage with two decimal places
                                     }
                                 }
+                            },
+                            datalabels: {
+                                display: false
                             }
                         },
                         scales: {
@@ -178,6 +176,44 @@
                                     callback: function(value, index, values) {
                                         return (value * 100) + '%';
                                     }
+                                }
+                            }
+                        }
+                    }
+                });
+
+                // Science Grade Pie Chart
+                const science_count = data["gradescience_data"];
+                const science_title = [].concat(...science_count.map(obj => Object.keys(obj)));
+                const science_value = [].concat(...science_count.map(obj => Object.values(obj)));
+
+                // draw pie chart
+                new Chart("piechart_gradescience", {
+                    type: "pie",
+                    data: {
+                        labels: science_title, // header
+                        datasets: [{
+                            backgroundColor: ["#0e6573", "#008e89", "#00b680", "#73da5d", "#e0f420",],
+                            data: science_value // value
+                        }]
+                    },
+                    options: {
+                        plugins: {
+                            legend: {
+                                display: false,
+                            },
+                            datalabels: {
+                                color: 'black',
+                                labels: {
+                                    title: {
+                                        font: {
+                                            weight: 'bold'
+                                        }
+                                    }
+                                },
+                                formatter: (value, ctx) => {
+                                    let label = ctx.chart.data.labels[ctx.dataIndex];
+                                    return label + ': ' + value;
                                 }
                             }
                         }
