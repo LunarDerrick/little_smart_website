@@ -44,7 +44,7 @@ include_once "helper_list_roster.php";
         <p id="mobile">You are now viewing as <b>Mobile Device</b>.</p>
 
         <button type="button" class="btn btn-primary mobile" onclick="document.location='roster.php'">Name List</button>
-        <button type="button" class="btn btn-primary mobile" onclick="document.location='analysis.html'">Exam Analysis</button>
+        <button type="button" class="btn btn-primary mobile" onclick="document.location='analysis.php'">Exam Analysis</button>
         <button type="button" class="btn btn-primary mobile" onclick="document.location='feedback.html'">Feedback Inbox</button>
         <button type="button" class="btn btn-primary mobile" onclick="document.location='list_post.html'">Edit Post</button>
         <button type="button" class="btn btn-primary mobile" onclick="document.location='index.html'">Logout</button>

@@ -16,11 +16,11 @@ canvas {
     text-align: center;
 }
 
-canvas#barchart_passingrate {
-    max-width: 310px;
-}
-
 canvas#piechart_gradescience {
     margin: auto;
-    max-width: 152px;
+    max-width: 162px;
+}
+
+#table-graph th, #table-graph td {
+    border-width: 1px;
 }

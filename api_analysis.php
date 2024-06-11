@@ -26,8 +26,6 @@ while($row = $result->fetch_assoc()){
 }
 
 // fetch science grade distribution data from database
-// fetch science column
-// assign grade to each score
 $myquery = "SELECT 
             SUM(CASE WHEN science >= 80 THEN 1 ELSE 0 END) AS 'A',
             SUM(CASE WHEN science >= 60 AND science < 80 THEN 1 ELSE 0 END) AS 'B',
@@ -46,6 +44,27 @@ try {
 $result = $query->get_result();
 while($row = $result->fetch_assoc()){
     $data["gradescience_data"][] = $row;
+}
+
+// fetch average score data from database
+$myquery = "SELECT
+            AVG(mandarin) AS Mandarin,
+            AVG(english) AS English,
+            AVG(malay) AS Malay,
+            AVG(math) AS Math,
+            AVG(science) AS Science
+            FROM students";
+try {
+    $query = $conn->prepare($myquery);
+    // $query->bind_param('s', $student_id);
+    $query->execute();
+} catch (Exception $e) {
+    echo $e->getMessage();
+    die;
+}
+$result = $query->get_result();
+while($row = $result->fetch_assoc()){
+    $data["avgscore_data"][] = $row;
 }
 
 // // fetch post data by rating from database

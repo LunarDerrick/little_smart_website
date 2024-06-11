@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<?php
+require_once("init_db.php");
+include_once "helper_list_score.php";
+?>
+
 <head>
     <title>Exam Analysis - Little Smart Day Care Centre</title>
 
@@ -40,7 +45,7 @@
         <p id="mobile">You are now viewing as <b>Mobile Device</b>.</p>
         
         <button type="button" class="btn btn-primary mobile" onclick="document.location='roster.php'">Name List</button>
-        <button type="button" class="btn btn-primary mobile" onclick="document.location='analysis.html'">Exam Analysis</button>
+        <button type="button" class="btn btn-primary mobile" onclick="document.location='analysis.php'">Exam Analysis</button>
         <button type="button" class="btn btn-primary mobile" onclick="document.location='feedback.html'">Feedback Inbox</button>
         <button type="button" class="btn btn-primary mobile" onclick="document.location='list_post.html'">Edit Post</button>
         <button type="button" class="btn btn-primary mobile" onclick="document.location='index.html'">Logout</button>
@@ -51,7 +56,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-6 col-lg-4">
-                        <div class="card border-2">
+                        <div class="card border-0">
                             <picture>
                                 <canvas id="barchart_passingrate"></canvas>
                             </picture>
@@ -61,7 +66,7 @@
                         </div>
                     </div>
                     <div class="col-md-6 col-lg-4">
-                        <div class="card border-2">
+                        <div class="card border-0">
                             <picture>
                                 <canvas id="piechart_gradescience"></canvas>
                             </picture>
@@ -71,19 +76,27 @@
                         </div>
                     </div>
                     <div class="col-md-6 col-lg-4">
-                        <div class="card border-2">
-                            <picture>
-                                <canvas id="comments"></canvas>
-                            </picture>
+                        <div class="card border-0">
+                            <table id="table-graph">
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Subject</th>
+                                    <th>Score</th>
+                                </tr>
+                                <?php
+                                    [$list] = listScore($conn);
+                                    buildScore($list);
+                                ?>
+                            </table>
                             <div class="card-body">
                                 <h6>Top Scorer for Each Subject</h6>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6 col-lg-4">
-                        <div class="card border-2">
+                        <div class="card border-0">
                             <picture>
-                                <canvas id="verticalBarChart"></canvas>
+                                <canvas id="barchart_avgscore"></canvas>
                             </picture>
                             <div class="card-body">
                                 <h6>Average Score of All Subjects</h6>
@@ -93,8 +106,9 @@
                 </div>
             </div>
         </section>
-
     </section>
+
+    <br><br>
 
     <footer>
         <small><i>
@@ -125,7 +139,6 @@
                 // console.log(data);
 
                 // Passing Rate Bar Chart
-                // convert data into no. of pass/total
                 const pass_rate = data["pass_data"];
                 const pass_title = [].concat(...pass_rate.map(obj => Object.keys(obj)));
                 const pass_value = [].concat(...pass_rate.map(obj => Object.values(obj)));
@@ -153,9 +166,10 @@
                             },
                             tooltip: {
                                 callbacks: {
+                                    // Convert decimal to percentage
                                     label: function(tooltipItem) {
-                                        var value = Math.round(tooltipItem.raw * 100); // Convert decimal to percentage
-                                        return value + '%'; // Display as percentage with two decimal places
+                                        var value = Math.round(tooltipItem.raw * 100); 
+                                        return value + '%';
                                     }
                                 }
                             },
@@ -191,10 +205,10 @@
                 new Chart("piechart_gradescience", {
                     type: "pie",
                     data: {
-                        labels: science_title, // header
+                        labels: science_title,
                         datasets: [{
                             backgroundColor: ["#0e6573", "#008e89", "#00b680", "#73da5d", "#e0f420",],
-                            data: science_value // value
+                            data: science_value
                         }]
                     },
                     options: {
@@ -215,6 +229,51 @@
                                     let label = ctx.chart.data.labels[ctx.dataIndex];
                                     return label + ': ' + value;
                                 }
+                            }
+                        }
+                    }
+                });
+
+                const avg_score = data["avgscore_data"];
+                const avg_title = [].concat(...avg_score.map(obj => Object.keys(obj)));
+                const avg_value = [].concat(...avg_score.map(obj => Object.values(obj)));
+
+                // draw vertical bar chart
+                new Chart("barchart_avgscore", {
+                    type: "bar",
+                    data: {
+                        labels: avg_title,
+                        datasets: [{
+                            backgroundColor: ["#fd7f6f", "#7eb0d5", "#b2e061", "#bd7ebe", "#ffb55a"],
+                            data: avg_value
+                        }]
+                    },
+                    options: {
+                        plugins: {
+                            legend: {
+                                display: false
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    // round to nearest 1 decimal place
+                                    label: function(tooltipItem) {
+                                        var value = (Math.round(tooltipItem.raw * 10) /10).toFixed(1); 
+                                        return value;
+                                    }
+                                }
+                            },
+                            datalabels: {
+                                display: false
+                            }
+                        },
+                        scales: {
+                            y: {
+                                suggestedMin: 0, // Minimum value for the y-axis
+                                suggestedMax: 100, // Maximum value for the y-axis
+                                title: {
+                                    display: true,
+                                    text: "Score"
+                                },
                             }
                         }
                     }
