@@ -101,19 +101,20 @@ if ($row = $result->fetch_object()){
                         <div class="row">
                             <div class="form-label">
                                 <label for="age"><b>Age</b></label>
-                                <input type="age" id="age" name="age" class="form-control" value="<?php echo $entry->age?>" required>
+                                <input type="number" min="1" id="age" name="age" class="form-control" value="<?php echo $entry->age?>" required>
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-label">
                                 <label for="telno"><b>Phone Number</b></label>
-                                <input type="telno" id="telno" name="telno" class="form-control" value="<?php echo $entry->telno?>" required>
+                                <input type="tel"  id="telno" name="telno" class="form-control" value="<?php echo $entry->telno?>" required
+                                pattern="([0-9]{3}-[0-9]{7})|([0-9]{3}-[0-9]{8})" placeholder="012-3456789">
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-label">
                                 <label for="school"><b>School</b></label>
-                                <input type="school" id="school" name="school" class="form-control" value="<?php echo $entry->school?>" required>
+                                <input type="text" id="school" name="school" class="form-control" value="<?php echo $entry->school?>" required>
                             </div>
                         </div>
                         <div class="row">
@@ -121,43 +122,37 @@ if ($row = $result->fetch_object()){
                                 <label for="standard"><b>Standard</b></label>
                                 <select type="standard" id="standard" name="standard" class="form-select" required>
                                     <?php preSelect($entry->standard)?>
-                                    <!-- <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                    <option value="6">6</option> -->
                                 </select>
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-label">
                                 <label for="mandarin"><b>Mandarin</b></label>
-                                <input type="mandarin" id="mandarin" name="mandarin" class="form-control" value="<?php echo $entry->mandarin?>" required>
+                                <input type="number" min="0" max="100" id="mandarin" name="mandarin" class="form-control" value="<?php echo $entry->mandarin?>" required>
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-label">
                                 <label for="english"><b>English</b></label>
-                                <input type="english" id="english" name="english" class="form-control" value="<?php echo $entry->english?>" required>
+                                <input type="number" min="0" max="100" id="english" name="english" class="form-control" value="<?php echo $entry->english?>" required>
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-label">
                                 <label for="malay"><b>Malay</b></label>
-                                <input type="malay" id="malay" name="malay" class="form-control" value="<?php echo $entry->malay?>" required>
+                                <input type="number" min="0" max="100" id="malay" name="malay" class="form-control" value="<?php echo $entry->malay?>" required>
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-label">
                                 <label for="math"><b>Mathematics</b></label>
-                                <input type="math" id="math" name="math" class="form-control" value="<?php echo $entry->math?>" required>
+                                <input type="number" min="0" max="100" id="math" name="math" class="form-control" value="<?php echo $entry->math?>" required>
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-label">
                                 <label for="science"><b>Science</b></label>
-                                <input type="science" id="science" name="science" class="form-control" value="<?php echo $entry->science?>" required>
+                                <input type="number" min="0" max="100" id="science" name="science" class="form-control" value="<?php echo $entry->science?>" required>
                             </div>
                         </div>
                         <div class="row">
