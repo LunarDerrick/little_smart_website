@@ -50,7 +50,7 @@ require_once("init_db.php");
                     <h1>New Entry</h1>
                 </div>
                 
-                <form action="api_addroster.php" method="POST" enctype="multipart/form-data">
+                <form action="api_addroster.php" method="POST" enctype="multipart/form-data" id="rosterForm">
                     <div class="container">
                         <div class="row">
                             <div class="col-md-12 form-label">
@@ -68,12 +68,12 @@ require_once("init_db.php");
                             <div class="form-label">
                                 <label for="telno"><b>Phone Number</b></label>
                                 <input type="tel"  id="telno" name="telno" class="form-control" required
-                                pattern="([0-9]{3}-[0-9]{7})|([0-9]{3}-[0-9]{8})" placeholder="012-3456789">
+                                pattern="([0-9]{3}-[0-9]{7})|([0-9]{3}-[0-9]{8})" placeholder="Example: 012-3456789">
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-label">
-                                <label for="school"><b>School</b></label>
+                                <label for="school"><b>Primary School</b></label>
                                 <input type="text" id="school" name="school" class="form-control" required>
                             </div>
                         </div>
@@ -88,6 +88,11 @@ require_once("init_db.php");
                                     <option value="5">5</option>
                                     <option value="6">6</option>
                                 </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-label">
+                                <h4>Exam Scores</h4>
                             </div>
                         </div>
                         <div class="row">

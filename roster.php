@@ -52,6 +52,7 @@ include_once "helper_list_roster.php";
         <br>
 
         <div id="roster">
+            <p><small><i>Click on any column to sort table in ascending or descending order.</i></small></p>
             <table id="rosterTable">
                 <tr>
                     <th>Actions</th>
@@ -133,15 +134,31 @@ include_once "helper_list_roster.php";
                     x = rows[i].getElementsByTagName("td")[columnIndex];
                     y = rows[i + 1].getElementsByTagName("td")[columnIndex];
                     
-                    if (dir == "asc") {
-                        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-                            shouldSwitch = true;
-                            break;
+                    if (Number.isInteger(parseInt(x.innerHTML)) && Number.isInteger(parseInt(y.innerHTML))) {
+                        // sort numerically
+                        if (dir == "asc") {
+                            if (parseInt(x.innerHTML) > parseInt(y.innerHTML)) {
+                                shouldSwitch = true;
+                                break;
+                            }
+                        } else if (dir == "desc") {
+                            if (parseInt(x.innerHTML) < parseInt(y.innerHTML)) {
+                                shouldSwitch = true;
+                                break;
+                            }
                         }
-                    } else if (dir == "desc") {
-                        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
-                            shouldSwitch = true;
-                            break;
+                    } else {
+                        // sort alphabetically
+                        if (dir == "asc") {
+                            if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                                shouldSwitch = true;
+                                break;
+                            }
+                        } else if (dir == "desc") {
+                            if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                                shouldSwitch = true;
+                                break;
+                            }
                         }
                     }
                 }
@@ -156,6 +173,25 @@ include_once "helper_list_roster.php";
                         switching = true;
                     }
                 }
+            }
+
+            // Reset visual indicators
+            resetSortingIndicators();
+
+            // Set visual indicator for the current column
+            let header = table.rows[0].getElementsByTagName("th")[columnIndex];
+            if (dir == "asc") {
+                indicator = ' ▲';
+            } else if (dir == "desc") {
+                indicator = ' ▼';
+            }
+            header.innerHTML += indicator;
+        }
+
+        function resetSortingIndicators() {
+            let headers = document.getElementsByTagName("th");
+            for (let i = 0; i < headers.length; i++) {
+                headers[i].innerHTML = headers[i].innerHTML.split(" ")[0]; // Remove existing indicators
             }
         }
         

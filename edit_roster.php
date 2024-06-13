@@ -108,12 +108,12 @@ if ($row = $result->fetch_object()){
                             <div class="form-label">
                                 <label for="telno"><b>Phone Number</b></label>
                                 <input type="tel"  id="telno" name="telno" class="form-control" value="<?php echo $entry->telno?>" required
-                                pattern="([0-9]{3}-[0-9]{7})|([0-9]{3}-[0-9]{8})" placeholder="012-3456789">
+                                pattern="([0-9]{3}-[0-9]{7})|([0-9]{3}-[0-9]{8})" placeholder="Example: 012-3456789">
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-label">
-                                <label for="school"><b>School</b></label>
+                                <label for="school"><b>Primary School</b></label>
                                 <input type="text" id="school" name="school" class="form-control" value="<?php echo $entry->school?>" required>
                             </div>
                         </div>
@@ -123,6 +123,11 @@ if ($row = $result->fetch_object()){
                                 <select type="standard" id="standard" name="standard" class="form-select" required>
                                     <?php preSelect($entry->standard)?>
                                 </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-label">
+                                <h4>Exam Scores</h4>
                             </div>
                         </div>
                         <div class="row">

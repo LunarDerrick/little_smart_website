@@ -20,8 +20,7 @@ function buildScore($list) {
     }
 }
 
-// name     subject     score
-// abc      math        99
+// fetch top scorer data
 function listScore($conn) {
     // prepare select query
     $stmt = $conn->prepare("SELECT
